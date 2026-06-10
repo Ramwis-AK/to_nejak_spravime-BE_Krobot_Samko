@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\NovinkaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// ---- Verejné read-only endpointy ----
+Route::get('/novinky', [NovinkaController::class, 'index']);
+Route::get('/novinky/{novinka}', [NovinkaController::class, 'show']);

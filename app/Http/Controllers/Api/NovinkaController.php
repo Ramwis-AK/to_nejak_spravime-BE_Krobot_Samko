@@ -3,47 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Novinka;
 
 class NovinkaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // GET /api/novinky  — verejný zoznam, najnovšie prvé
     public function index()
     {
-        //
+        return Novinka::orderBy('datum', 'desc')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // GET /api/novinky/{novinka} — detail
+    public function show(Novinka $novinka)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $novinka;
     }
 }
