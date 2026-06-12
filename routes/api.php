@@ -23,5 +23,6 @@ Route::get('/partneri', [PartnerController::class, 'index']);
 Route::get('/mentori', [MentorController::class, 'index']);
 
 Route::get('/vyzvy', [VyzvaController::class, 'index']);
+Route::get('/vyzvy/{vyzva}', [VyzvaController::class, 'show']);
 
 Route::post('/kontakt', [KontaktController::class, 'store'])->middleware('throttle:5,1');
