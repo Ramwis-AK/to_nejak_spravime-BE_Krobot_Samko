@@ -1,4 +1,3 @@
-// routes/api.php  (nahraď celý obsah)
 <?php
 
 use App\Http\Controllers\Api\NovinkaController;
