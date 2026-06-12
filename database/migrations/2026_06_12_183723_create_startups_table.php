@@ -1,4 +1,3 @@
-// database/migrations/2026_06_10_141000_create_startups_table.php
 <?php
 
 use Illuminate\Database\Migrations\Migration;

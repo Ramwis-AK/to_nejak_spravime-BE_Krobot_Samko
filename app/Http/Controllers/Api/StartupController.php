@@ -3,47 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Startup;
 
 class StartupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // GET /api/startups
     public function index()
     {
-        //
+        return Startup::orderBy('nazov')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // GET /api/startups/{startup}
+    // Laravel automaticky nájde záznam podľa ID, alebo vráti 404
+    public function show(Startup $startup)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $startup;
     }
 }
