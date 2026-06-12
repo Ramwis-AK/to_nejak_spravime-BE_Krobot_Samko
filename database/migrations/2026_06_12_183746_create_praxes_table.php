@@ -6,22 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('praxes', function (Blueprint $table) {
+        Schema::create('praxe', function (Blueprint $table) {
             $table->id();
+            $table->string('firma');
+            $table->string('sektor');
+            $table->string('stav');          // čitateľný text: Otvorené...
+            $table->string('stavKey');       // strojový kľúč: open/pairing/active
+            $table->string('lokalita');
+            $table->string('zadanie');
+            $table->string('odmena');
+            $table->text('popis')->nullable();
+            // kontakt na zadávateľa (detail stránka)
+            $table->string('kontaktMeno')->nullable();
+            $table->string('kontaktEmail')->nullable();
+            $table->string('kontaktTel')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('praxes');
+        Schema::dropIfExists('praxe');
     }
 };
