@@ -10,6 +10,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             NovinkaSeeder::class,
+            StartupSeeder::class,
+            PraxSeeder::class,
+            PartnerSeeder::class,
+            MentorSeeder::class,
         ]);
     }
 }
