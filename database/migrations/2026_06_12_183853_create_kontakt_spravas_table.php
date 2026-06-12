@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('telefon')->nullable();
             $table->string('tema')->nullable();
             $table->text('sprava');
+            $table->boolean('gdpr')->default(false); // súhlas so spracovaním (§13)
             $table->timestamps();
         });
     }

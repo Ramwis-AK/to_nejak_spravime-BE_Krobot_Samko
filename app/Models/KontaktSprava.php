@@ -8,5 +8,7 @@ class KontaktSprava extends Model
 {
     protected $table = 'kontakt_spravy';
 
-    protected $fillable = ['meno', 'email', 'telefon', 'tema', 'sprava'];
+    protected $fillable = ['meno', 'email', 'telefon', 'tema', 'sprava', 'gdpr'];
+
+    protected $casts = ['gdpr' => 'boolean'];
 }

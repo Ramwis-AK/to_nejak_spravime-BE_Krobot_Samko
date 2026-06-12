@@ -1,3 +1,4 @@
+// routes/api.php  (nahraď celý obsah)
 <?php
 
 use App\Http\Controllers\Api\NovinkaController;
@@ -6,6 +7,7 @@ use App\Http\Controllers\Api\PraxController;
 use App\Http\Controllers\Api\PartnerController;
 use App\Http\Controllers\Api\MentorController;
 use App\Http\Controllers\Api\KontaktController;
+use App\Http\Controllers\Api\VyzvaController;
 use Illuminate\Support\Facades\Route;
 
 // ---- Verejné read-only endpointy ----
@@ -21,5 +23,6 @@ Route::get('/praxe/{prax}', [PraxController::class, 'show']);
 Route::get('/partneri', [PartnerController::class, 'index']);
 Route::get('/mentori', [MentorController::class, 'index']);
 
-// ---- Verejný zápis (formulár) ----
-Route::post('/kontakt', [KontaktController::class, 'store']);
+Route::get('/vyzvy', [VyzvaController::class, 'index']);
+
+Route::post('/kontakt', [KontaktController::class, 'store'])->middleware('throttle:5,1');
