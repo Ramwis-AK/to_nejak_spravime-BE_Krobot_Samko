@@ -12,5 +12,6 @@ class Prax extends Model
     protected $fillable = [
         'firma', 'sektor', 'stav', 'stavKey', 'lokalita', 'zadanie',
         'odmena', 'popis', 'kontaktMeno', 'kontaktEmail', 'kontaktTel',
+        'user_id', 'kod',
     ];
 }

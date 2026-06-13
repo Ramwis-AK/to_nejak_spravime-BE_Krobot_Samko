@@ -10,15 +10,16 @@ return new class extends Migration
     {
         Schema::create('praxe', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete(); // null = seed dáta
+            $table->string('kod')->nullable();        // ZAD-0001 (firemné zadanie)
             $table->string('firma');
             $table->string('sektor');
-            $table->string('stav');          // čitateľný text: Otvorené...
-            $table->string('stavKey');       // strojový kľúč: open/pairing/active
+            $table->string('stav');
+            $table->string('stavKey');
             $table->string('lokalita');
             $table->string('zadanie');
             $table->string('odmena');
             $table->text('popis')->nullable();
-            // kontakt na zadávateľa (detail stránka)
             $table->string('kontaktMeno')->nullable();
             $table->string('kontaktEmail')->nullable();
             $table->string('kontaktTel')->nullable();
