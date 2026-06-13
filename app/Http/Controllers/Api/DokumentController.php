@@ -57,4 +57,18 @@ class DokumentController extends Controller
 
         return response()->json(['message' => 'Dokument zmazaný.']);
     }
+
+        public function firmaStiahnut(Request $request, Dokument $dokument)
+    {
+        abort_unless($request->user()->rola === 'firma', 403);
+
+        $opravneny = \App\Models\Prihlaska::where('user_id', $dokument->user_id)
+            ->whereHas('prax', fn ($q) => $q->where('user_id', $request->user()->id))
+            ->exists();
+
+        abort_unless($opravneny, 403);
+        abort_unless(Storage::exists($dokument->cesta), 404);
+
+        return Storage::download($dokument->cesta, $dokument->nazov);
+    }
 }

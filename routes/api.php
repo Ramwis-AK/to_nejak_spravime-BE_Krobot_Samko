@@ -48,12 +48,16 @@ Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
     Route::post('/dokumenty', [DokumentController::class, 'store']);
     Route::get('/dokumenty/{dokument}/stiahnut', [DokumentController::class, 'download']);
     Route::delete('/dokumenty/{dokument}', [DokumentController::class, 'destroy']);
+    Route::get('/firma/dokumenty/{dokument}/stiahnut', [DokumentController::class, 'firmaStiahnut']);
 
     // FIRMA — zadania (CRUD)
     Route::get('/zadania', [ZadanieController::class, 'index']);
     Route::post('/zadania', [ZadanieController::class, 'store']);
     Route::put('/zadania/{kod}', [ZadanieController::class, 'update']);
     Route::delete('/zadania/{kod}', [ZadanieController::class, 'destroy']);
+    
+    Route::get('/firma/prihlasky', [PrihlaskaController::class, 'firemne']);
+    Route::patch('/prihlasky/{prihlaska}/stav', [PrihlaskaController::class, 'rozhodnut']);
     // FIRMA — rozpočet (dokumenty využívajú existujúce /dokumenty)
     Route::get('/rozpocet', [RozpocetController::class, 'show']);
     Route::put('/rozpocet', [RozpocetController::class, 'update']);

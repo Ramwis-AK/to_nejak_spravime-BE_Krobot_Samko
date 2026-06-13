@@ -8,5 +8,15 @@ class Prihlaska extends Model
 {
     protected $table = 'prihlasky';
 
-    protected $fillable = ['user_id', 'program', 'nazov', 'popis', 'oblast', 'motivacia', 'stav'];
+    protected $fillable = ['user_id', 'prax_id', 'program', 'nazov', 'popis', 'oblast', 'motivacia', 'stav'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function prax()
+    {
+        return $this->belongsTo(Prax::class, 'prax_id');
+    }
 }

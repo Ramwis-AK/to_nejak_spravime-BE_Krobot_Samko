@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('prihlasky', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('program');                 // A / B
+            $table->unsignedBigInteger('prax_id')->nullable();   // zadanie Programu B
+            $table->string('program');
             $table->string('nazov');
             $table->text('popis')->nullable();
             $table->string('oblast')->default('');
             $table->text('motivacia')->nullable();
-            $table->string('stav')->default('Podaná');  // stavový automat §7.4
+            $table->string('stav')->default('Podaná');
             $table->timestamps();
         });
     }
