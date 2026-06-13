@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ZadanieController;
 use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\PrihlaskaController;
+use App\Http\Controllers\Api\DokumentController;
 use Illuminate\Support\Facades\Route;
 
 // ---- Verejné read-only endpointy ----
@@ -39,6 +40,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::put('/profil', [ProfileController::class, 'update']);
+
+    Route::get('/dokumenty', [DokumentController::class, 'index']);
+    Route::post('/dokumenty', [DokumentController::class, 'store']);
+    Route::get('/dokumenty/{dokument}/stiahnut', [DokumentController::class, 'download']);
+    Route::delete('/dokumenty/{dokument}', [DokumentController::class, 'destroy']);
 
     // FIRMA — zadania (CRUD)
     Route::get('/zadania', [ZadanieController::class, 'index']);
