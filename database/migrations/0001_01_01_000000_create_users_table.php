@@ -6,17 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('meno');
+            $table->string('priezvisko')->default('');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // RBAC rola (§4) — určuje, čo používateľ smie
+            $table->string('rola'); // student | vedouci | firma | mentor
+            // profilové polia (rôzne podľa roly)
+            $table->string('telefon')->default('');
+            $table->string('adresa')->default('');
+            $table->string('ico')->default('');
+            $table->string('sektor')->default('');
+            $table->string('web')->default('');
+            $table->text('popis')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,9 +43,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');
