@@ -32,12 +32,12 @@ Route::post('/kontakt', [KontaktController::class, 'store'])->middleware('thrott
 // ---- Auth (verejné, s rate limitom proti brute-force) ----
 Route::post('/auth/register', [AuthController::class, 'register'])->middleware('throttle:10,1');
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
+Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
 
 // ---- Chránené endpointy (vyžadujú Sanctum token) ----
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
-    Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
     Route::put('/profil', [ProfileController::class, 'update']);
 
     // FIRMA — zadania (CRUD)
