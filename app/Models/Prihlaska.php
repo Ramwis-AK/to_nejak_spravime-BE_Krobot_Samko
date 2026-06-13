@@ -8,7 +8,7 @@ class Prihlaska extends Model
 {
     protected $table = 'prihlasky';
 
-    protected $fillable = ['user_id', 'prax_id', 'program', 'nazov', 'popis', 'oblast', 'motivacia', 'stav'];
+    protected $fillable = ['user_id', 'prax_id', 'program', 'nazov', 'popis', 'oblast', 'motivacia', 'stav', 'skore', 'komentar'];
 
     public function user()
     {

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SpravaController;
 use App\Http\Controllers\Api\RozpocetController;
 use App\Http\Controllers\Api\KonzultaciaController;
+use App\Http\Controllers\Api\AuditController;
 
 // ---- Verejné read-only endpointy ----
 Route::get('/novinky', [NovinkaController::class, 'index']);
@@ -81,4 +82,16 @@ Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
     // ŠTUDENT / VEDÚCI — prihlášky
     Route::get('/prihlasky', [PrihlaskaController::class, 'index']);
     Route::post('/prihlasky', [PrihlaskaController::class, 'store']);
+
+    // ADMIN — výzvy CRUD
+    Route::post('/vyzvy', [VyzvaController::class, 'store']);
+    Route::put('/vyzvy/{vyzva}', [VyzvaController::class, 'update']);
+    Route::delete('/vyzvy/{vyzva}', [VyzvaController::class, 'destroy']);
+    // ADMIN — prihlášky + audit
+    Route::get('/admin/prihlasky', [PrihlaskaController::class, 'adminVsetky']);
+    Route::patch('/admin/prihlasky/{prihlaska}/stav', [PrihlaskaController::class, 'adminStav']);
+    Route::get('/admin/audit', [AuditController::class, 'index']);
+    // KOMISIA — hodnotenie Programu A
+    Route::get('/komisia/prihlasky', [PrihlaskaController::class, 'komisiaPrihlasky']);
+    Route::patch('/komisia/prihlasky/{prihlaska}', [PrihlaskaController::class, 'komisiaHodnotit']);
 });

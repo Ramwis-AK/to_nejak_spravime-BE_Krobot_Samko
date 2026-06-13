@@ -11,13 +11,15 @@ return new class extends Migration
         Schema::create('prihlasky', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->unsignedBigInteger('prax_id')->nullable();   // zadanie Programu B
+            $table->unsignedBigInteger('prax_id')->nullable();
             $table->string('program');
             $table->string('nazov');
             $table->text('popis')->nullable();
             $table->string('oblast')->default('');
             $table->text('motivacia')->nullable();
             $table->string('stav')->default('Podaná');
+            $table->unsignedTinyInteger('skore')->nullable();   // hodnotenie komisie
+            $table->text('komentar')->nullable();
             $table->timestamps();
         });
     }

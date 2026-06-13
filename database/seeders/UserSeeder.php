@@ -14,6 +14,8 @@ class UserSeeder extends Seeder
             ['student', 'Študent', 'Testovací', 'student@nti.sk'],
             ['firma', 'TestFirma s.r.o.', '', 'firma@nti.sk'],
             ['mentor', 'Mentor', 'Testovací', 'mentor@nti.sk'],
+            ['admin', 'NTI', 'Admin', 'admin@nti.sk'],
+            ['komisia', 'Komisia', 'NTI', 'komisia@nti.sk'],
         ];
 
         foreach ($ucty as $u) {
