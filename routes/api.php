@@ -37,6 +37,7 @@ Route::post('/auth/login', [AuthController::class, 'login'])->middleware('thrott
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
     Route::put('/profil', [ProfileController::class, 'update']);
 
     // FIRMA — zadania (CRUD)

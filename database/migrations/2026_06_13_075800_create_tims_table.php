@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('timy', function (Blueprint $table) {
+        Schema::create('tims', function (Blueprint $table) {
             $table->id();
             $table->string('kod')->unique();             // TIM-0001
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();   // vedúci
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('tim_clenovia', function (Blueprint $table) {
+        Schema::create('tim_clens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tim_id')->constrained('timy')->cascadeOnDelete();
             $table->string('meno');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('milniky', function (Blueprint $table) {
+        Schema::create('milniks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tim_id')->constrained('timy')->cascadeOnDelete();
             $table->string('nazov');
@@ -38,8 +38,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('milniky');
-        Schema::dropIfExists('tim_clenovia');
-        Schema::dropIfExists('timy');
+        Schema::dropIfExists('milniks');
+        Schema::dropIfExists('tim_clens');
+        Schema::dropIfExists('tims');
     }
 };

@@ -6,22 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('milniks', function (Blueprint $table) {
+        Schema::create('milniky', function (Blueprint $table) {
             $table->id();
+            // väzba na tím — míľnik patrí konkrétnemu tímu
+            $table->foreignId('tim_id')->constrained('timy')->cascadeOnDelete();
+            $table->string('nazov');
+            $table->boolean('splneny')->default(false); // schválený mentorom?
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('milniks');
+        Schema::dropIfExists('milniky');
     }
 };

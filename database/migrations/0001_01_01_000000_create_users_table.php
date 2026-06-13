@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('priezvisko')->default('');
             $table->string('email')->unique();
             $table->string('password');
-            // RBAC rola (§4) — určuje, čo používateľ smie
+            // určuje, čo používateľ smie
             $table->string('rola'); // student | vedouci | firma | mentor
             // profilové polia (rôzne podľa roly)
             $table->string('telefon')->default('');
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('sektor')->default('');
             $table->string('web')->default('');
             $table->text('popis')->nullable();
+            $table->timestamp('email_verified_at')->nullable(); // kedy bol e-mail overený
+            $table->string('verifikacny_token')->nullable();    // jednorazový token na overenie
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,22 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('tim_clens', function (Blueprint $table) {
+        Schema::create('tim_clenovia', function (Blueprint $table) {
             $table->id();
+            // väzba na tím — pri zmazaní tímu sa zmažú aj jeho členovia
+            $table->foreignId('tim_id')->constrained('timy')->cascadeOnDelete();
+            $table->string('meno');
+            $table->string('telefon')->default('');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('tim_clens');
+        Schema::dropIfExists('tim_clenovia');
     }
 };

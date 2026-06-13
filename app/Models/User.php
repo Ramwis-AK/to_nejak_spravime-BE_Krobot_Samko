@@ -13,13 +13,14 @@ class User extends Authenticatable
     protected $fillable = [
         'meno', 'priezvisko', 'email', 'password', 'rola',
         'telefon', 'adresa', 'ico', 'sektor', 'web', 'popis',
+        'verifikacny_token', 'email_verified_at',
     ];
 
-    // heslo a remember token sa nikdy neposielajú v JSON odpovedi
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'verifikacny_token'];
 
     protected $casts = [
-        'password' => 'hashed', // automatické hashovanie pri priradení
+        'password' => 'hashed',
+        'email_verified_at' => 'datetime',
     ];
 
     // pomocný atribút: celé meno (pre zobrazenie)
