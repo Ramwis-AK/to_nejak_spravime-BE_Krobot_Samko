@@ -39,7 +39,7 @@ Route::post('/auth/login', [AuthController::class, 'login'])->middleware('thrott
 Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
 
 // ---- Chránené endpointy (vyžadujú Sanctum token) ----
-Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::put('/profil', [ProfileController::class, 'update']);
@@ -63,9 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/timy/moj', [TimController::class, 'moj']);
     Route::post('/timy', [TimController::class, 'store']);
     Route::post('/timy/{tim}/clenovia', [TimController::class, 'addClen']);
-    // VEDÚCI — komunikácia s NTI
-    Route::get('/spravy', [SpravaController::class, 'index']);
-    Route::post('/spravy', [SpravaController::class, 'store']);
+    Route::delete('/timy/{tim}', [TimController::class, 'destroy']);
+
 
     // MENTOR — tímy a míľniky
     Route::get('/timy/mentor', [TimController::class, 'mentorTimy']);

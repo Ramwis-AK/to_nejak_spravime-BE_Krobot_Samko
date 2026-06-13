@@ -20,7 +20,7 @@ class AuthController extends Controller
             'priezvisko' => 'nullable|string|max:255',
             'email'      => 'required|email|max:255|unique:users,email',
             'password'   => ['required', 'confirmed', Password::min(8)],
-            'rola'       => 'required|in:student,vedouci,firma,mentor',
+            'rola'       => 'required|in:student,firma,mentor',
             'telefon'    => 'nullable|string|max:50',
             'ico'        => 'nullable|string|max:20',
             'sektor'     => 'nullable|string|max:255',

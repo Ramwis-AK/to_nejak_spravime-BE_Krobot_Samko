@@ -8,28 +8,28 @@ use Illuminate\Http\Request;
 
 class TimController extends Controller
 {
-    // GET /api/timy/moj — tím prihláseného vedúceho (alebo null)
+    // GET /api/timy/moj — tím prihláseného študenta (alebo null)
     public function moj(Request $request)
     {
-        abort_unless($request->user()->rola === 'vedouci', 403);
-        $tim = Tim::with(['clenovia', 'milniky', 'mentor'])
+        abort_unless($request->user()->rola === 'student', 403);
+        $tim = Tim::with(['clenovia', 'milniky', 'mentor', 'konzultacie'])
             ->where('user_id', $request->user()->id)->first();
+        // explicitne JSON null keď tím nie je
         return response()->json($tim ? $this->tvar($tim) : null);
     }
 
-    // POST /api/timy — vedúci vytvorí tím
+    // POST /api/timy
     public function store(Request $request)
     {
-        abort_unless($request->user()->rola === 'vedouci', 403);
+        $user = $request->user();
+        abort_unless($user->rola === 'student', 403);
 
-        // jeden vedúci = jeden tím
-        if (Tim::where('user_id', $request->user()->id)->exists()) {
+        if (Tim::where('user_id', $user->id)->exists()) {
             return response()->json(['message' => 'Už máš vytvorený tím.'], 409);
         }
 
         $data = $request->validate([
             'nazov'   => 'required|string|max:255',
-            'projekt' => 'nullable|string|max:255',
             'program' => 'nullable|in:Program A,Program B',
         ]);
 
@@ -37,18 +37,23 @@ class TimController extends Controller
 
         $tim = Tim::create([
             'kod'     => $kod,
-            'user_id' => $request->user()->id,
+            'user_id' => $user->id,
             'nazov'   => $data['nazov'],
-            'projekt' => $data['projekt'] ?? '',
             'program' => $data['program'] ?? 'Program A',
         ]);
 
-        // vedúci je automaticky prvý člen
-        $tim->clenovia()->create(['meno' => $request->user()->cele_meno, 'telefon' => $request->user()->telefon]);
+        $tim->clenovia()->create(['meno' => $user->cele_meno, 'telefon' => $user->telefon]);
 
-        return response()->json($this->tvar($tim->load(['clenovia', 'milniky', 'mentor'])), 201);
+        return response()->json($this->tvar($tim->load(['clenovia', 'milniky', 'mentor', 'konzultacie'])), 201);
     }
 
+    // DELETE /api/timy/{tim} — rozpustenie tímu (len vlastník); cascade zmaže všetko
+    public function destroy(Request $request, Tim $tim)
+    {
+        abort_unless($tim->user_id === $request->user()->id, 403);
+        $tim->delete();
+        return response()->json(['message' => 'Tím rozpustený.']);
+    }
     // POST /api/timy/{tim}/clenovia — pridanie člena (len vlastník tímu)
     public function addClen(Request $request, Tim $tim)
     {

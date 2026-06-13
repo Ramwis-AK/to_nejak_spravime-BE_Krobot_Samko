@@ -12,7 +12,6 @@ class UserSeeder extends Seeder
         // [rola, meno, priezvisko, email] — heslo: heslo123
         $ucty = [
             ['student', 'Študent', 'Testovací', 'student@nti.sk'],
-            ['veduci', 'Vedúci', 'Testovací', 'veduci@nti.sk'],
             ['firma', 'TestFirma s.r.o.', '', 'firma@nti.sk'],
             ['mentor', 'Mentor', 'Testovací', 'mentor@nti.sk'],
         ];

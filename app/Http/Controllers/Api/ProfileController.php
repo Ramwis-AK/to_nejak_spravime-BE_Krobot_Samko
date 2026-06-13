@@ -16,12 +16,18 @@ class ProfileController extends Controller
             'adresa'  => 'nullable|string|max:255',
             'ico'     => 'nullable|string|max:20',
             'sektor'  => 'nullable|string|max:255',
-            'web'     => 'nullable|url|max:255',
+            'web'     => 'nullable|string|max:255',
             'popis'   => 'nullable|string|max:2000',
         ]);
 
+        // stĺpce sú NOT NULL — null hodnoty preveď na prázdny reťazec
+        foreach (['meno', 'telefon', 'adresa', 'ico', 'sektor', 'web'] as $f) {
+            if (array_key_exists($f, $data) && $data[$f] === null) {
+                $data[$f] = '';
+            }
+        }
+
         $user = $request->user();
-        // aktualizujeme len odoslané polia (nie celý objekt)
         $user->fill($data)->save();
 
         return response()->json(['message' => 'Profil uložený.', 'user' => [

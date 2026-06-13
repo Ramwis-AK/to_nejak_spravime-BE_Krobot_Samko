@@ -14,7 +14,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('mentor_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('nazov');
-            $table->string('projekt')->default('');
             $table->string('program')->default('Program A');
             $table->timestamps();
         });

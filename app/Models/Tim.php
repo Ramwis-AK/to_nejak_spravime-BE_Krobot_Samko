@@ -8,7 +8,7 @@ class Tim extends Model
 {
     protected $table = 'timy';
 
-    protected $fillable = ['kod', 'user_id', 'mentor_id', 'nazov', 'projekt', 'program'];
+    protected $fillable = ['kod', 'user_id', 'mentor_id', 'nazov', 'program'];
 
     public function getRouteKeyName(): string
     {
