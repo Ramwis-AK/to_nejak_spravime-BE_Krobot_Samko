@@ -119,6 +119,8 @@ class TimController extends Controller
             'mentor'   => $t->mentor?->cele_meno,
             'clenovia' => $t->clenovia->map(fn ($c) => ['meno' => $c->meno, 'telefon' => $c->telefon]),
             'milniky'  => $t->milniky->map(fn ($m) => ['id' => $m->id, 'nazov' => $m->nazov, 'splneny' => (bool) $m->splneny]),
+            // NOVÉ: zápisy z konzultácií
+            'konzultacie' => $t->konzultacie->map(fn ($k) => ['text' => $k->text, 'datum' => $k->created_at?->format('d.m.Y H:i')]),
         ];
     }
 }

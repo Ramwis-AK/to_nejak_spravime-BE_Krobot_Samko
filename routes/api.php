@@ -14,6 +14,9 @@ use App\Http\Controllers\Api\TimController;
 use App\Http\Controllers\Api\PrihlaskaController;
 use App\Http\Controllers\Api\DokumentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SpravaController;
+use App\Http\Controllers\Api\RozpocetController;
+use App\Http\Controllers\Api\KonzultaciaController;
 
 // ---- Verejné read-only endpointy ----
 Route::get('/novinky', [NovinkaController::class, 'index']);
@@ -51,17 +54,26 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/zadania', [ZadanieController::class, 'store']);
     Route::put('/zadania/{zadanie}', [ZadanieController::class, 'update']);
     Route::delete('/zadania/{zadanie}', [ZadanieController::class, 'destroy']);
+    // FIRMA — rozpočet (dokumenty využívajú existujúce /dokumenty)
+    Route::get('/rozpocet', [RozpocetController::class, 'show']);
+    Route::put('/rozpocet', [RozpocetController::class, 'update']);
+
 
     // VEDÚCI — tím
     Route::get('/timy/moj', [TimController::class, 'moj']);
     Route::post('/timy', [TimController::class, 'store']);
     Route::post('/timy/{tim}/clenovia', [TimController::class, 'addClen']);
+    // VEDÚCI — komunikácia s NTI
+    Route::get('/spravy', [SpravaController::class, 'index']);
+    Route::post('/spravy', [SpravaController::class, 'store']);
 
     // MENTOR — tímy a míľniky
     Route::get('/timy/mentor', [TimController::class, 'mentorTimy']);
     Route::post('/timy/{tim}/mentor', [TimController::class, 'joinMentor']);
     Route::post('/timy/{tim}/milniky', [TimController::class, 'addMilnik']);
     Route::patch('/timy/{tim}/milniky/{milnik}', [TimController::class, 'approveMilnik']);
+    // MENTOR — zápisy z konzultácií
+    Route::post('/timy/{tim}/konzultacie', [KonzultaciaController::class, 'store']);
 
     // ŠTUDENT / VEDÚCI — prihlášky
     Route::get('/prihlasky', [PrihlaskaController::class, 'index']);
