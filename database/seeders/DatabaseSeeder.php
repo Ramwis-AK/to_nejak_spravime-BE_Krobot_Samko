@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             PartnerSeeder::class,
             MentorSeeder::class,
             DemoSeeder::class,
+            VyzvaSeeder::class,
         ]);
     }
 }
