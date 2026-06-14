@@ -11,11 +11,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             NovinkaSeeder::class,
-            StartupSeeder::class,
-            PraxSeeder::class,
             PartnerSeeder::class,
             MentorSeeder::class,
-            VyzvaSeeder::class,
+            DemoSeeder::class,
         ]);
     }
 }

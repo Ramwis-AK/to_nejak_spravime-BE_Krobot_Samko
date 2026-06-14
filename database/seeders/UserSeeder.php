@@ -9,9 +9,10 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // [rola, meno, priezvisko, email] — heslo: heslo123
+        // ukážkové účty (heslo: heslo123). vedouci = študent, ktorý si vytvorí tím
         $ucty = [
             ['student', 'Študent', 'Testovací', 'student@nti.sk'],
+            ['student', 'Vedúci', 'Tímu', 'vedouci@nti.sk'],
             ['firma', 'TestFirma s.r.o.', '', 'firma@nti.sk'],
             ['mentor', 'Mentor', 'Testovací', 'mentor@nti.sk'],
             ['admin', 'NTI', 'Admin', 'admin@nti.sk'],
@@ -20,14 +21,9 @@ class UserSeeder extends Seeder
 
         foreach ($ucty as $u) {
             User::create([
-                'meno' => $u[1],
-                'priezvisko' => $u[2],
-                'email' => $u[3],              // e-mail z poľa (nie z roly)
-                'password' => 'heslo123',
-                'rola' => $u[0],               // rola ostáva 'vedouci'
-                'email_verified_at' => now(),
+                'meno' => $u[1], 'priezvisko' => $u[2], 'email' => $u[3],
+                'password' => 'heslo123', 'rola' => $u[0], 'email_verified_at' => now(),
             ]);
         }
     }
 }
-  
