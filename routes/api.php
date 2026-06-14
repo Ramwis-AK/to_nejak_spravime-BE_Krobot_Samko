@@ -91,6 +91,11 @@ Route::get('/auth/verify/{token}', [AuthController::class, 'verify']);
     Route::get('/admin/prihlasky', [PrihlaskaController::class, 'adminVsetky']);
     Route::patch('/admin/prihlasky/{prihlaska}/stav', [PrihlaskaController::class, 'adminStav']);
     Route::get('/admin/audit', [AuditController::class, 'index']);
+    // ADMIN — novinky CRUD
+    Route::post('/novinky', [NovinkaController::class, 'store']);
+    Route::put('/novinky/{novinka}', [NovinkaController::class, 'update']);
+    Route::delete('/novinky/{novinka}', [NovinkaController::class, 'destroy']);
+
     // KOMISIA — hodnotenie Programu A
     Route::get('/komisia/prihlasky', [PrihlaskaController::class, 'komisiaPrihlasky']);
     Route::patch('/komisia/prihlasky/{prihlaska}', [PrihlaskaController::class, 'komisiaHodnotit']);
